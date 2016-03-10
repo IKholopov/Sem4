@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/FutexUnitTest.dir/src/futex.cpp.o CMakeFiles/FutexUnitTest.dir/src/UnitTest.cpp.o  -o FutexUnitTest -rdynamic -lpthread 

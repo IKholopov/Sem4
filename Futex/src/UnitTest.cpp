@@ -8,7 +8,7 @@
 #include <pthread.h>
 #include <chrono>
 
-long long MAX_SUM = 500000000;
+long long MAX_SUM = 5000000000;
 long long  global = 0;
 Futex futex;
 std::mutex mutex;
@@ -100,6 +100,7 @@ int main()
 {
     std::cout << "std::thread::hardware_concurrency() / 2:" << std::endl << std::endl;
     runTests(std::thread::hardware_concurrency() / 2);
+    std::cout << "std::thread::hardware_concurrency() * 2:" << std::endl << std::endl;
     runTests(std::thread::hardware_concurrency() * 2);
     return 0;
 }
