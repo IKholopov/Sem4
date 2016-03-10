@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/igor/Study/Programming/4SEM/Futex/src/UnitTest.cpp
+iostream
+-
+thread
+-
+vector
+-
+iterator
+-
+limits
+-
+futex.h
+-
+mutex
+-
+pthread.h
+-
+chrono
+-
+
+/home/igor/Study/Programming/4SEM/Futex/src/futex.cpp
+thread
+-
+futex.h
+-
+
+include/futex.h
+thread
+-
+atomic
+-
+

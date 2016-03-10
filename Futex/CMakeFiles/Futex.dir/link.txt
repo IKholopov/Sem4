@@ -1,0 +1,2 @@
+/usr/bin/ar qc libFutex.a  CMakeFiles/Futex.dir/src/futex.cpp.o CMakeFiles/Futex.dir/src/UnitTest.cpp.o
+/usr/bin/ranlib libFutex.a

@@ -1,0 +1,2 @@
+/home/igor/Study/Programming/4SEM/Futex/CMakeFiles/FutexUnitTest.dir
+/home/igor/Study/Programming/4SEM/Futex/CMakeFiles/Futex.dir
