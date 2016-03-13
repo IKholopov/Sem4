@@ -8,7 +8,7 @@
 #include <pthread.h>
 #include <chrono>
 
-long long MAX_SUM = 5000000000;
+long long MAX_SUM = 500000000;
 long long  global = 0;
 Futex futex;
 std::mutex mutex;
