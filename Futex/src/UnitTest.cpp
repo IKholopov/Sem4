@@ -85,7 +85,7 @@ void run(int increment(long long& localSum), size_t numberOfThreads)
     std::cout << "Elapsed time: " << elapsed.count() << std::endl;
 }
 
-int runTests(size_t nThreads)
+void runTests(size_t nThreads)
 {
     std::cout << "Futex:" << std::endl;
     run(&incrementFutex, nThreads);
