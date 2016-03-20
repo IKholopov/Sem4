@@ -117,6 +117,8 @@ void TestPopOrSleep()
     std::cout << "sum: " << sum << std::endl;
     BOOST_CHECK(queue.size() == 0);
     BOOST_CHECK(sum == itemsPerProducer * nProduceres);
+    for(auto cons: consumers)
+        delete cons;
 }
 template <class CONTAINER>
 void TestPopNoSleep()
@@ -171,6 +173,8 @@ void TestPopNoSleep()
     std::cout << "sum: " << sum << std::endl;
     BOOST_CHECK(queue.size() == 0);
     BOOST_CHECK(sum == itemsPerProducer * nProduceres);
+    for(auto cons: consumers)
+        delete cons;
 }
 BOOST_AUTO_TEST_CASE(popOrSleepList)
 {
