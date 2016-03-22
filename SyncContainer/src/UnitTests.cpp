@@ -21,7 +21,11 @@ void ConsumeOrSleep(unsigned int itemsCount, CSyncContainer<CONTAINER>& queue, s
 {
     for(int i = 0; i < itemsCount; ++i)
     {
-        consumed->push_back(queue.popOrSleep());
+        T item;
+        if(queue.popOrSleep(item))
+            consumed->push_back(item);
+        else
+            break;
     }
 }
 template <typename T, class CONTAINER>
@@ -113,10 +117,96 @@ void TestPopOrSleep()
         sum += consumers[i]->size();
         std::cout << consumers[i]->size() << " ";
     }
+
     std::cout << std::endl;
     std::cout << "sum: " << sum << std::endl;
     BOOST_CHECK(queue.size() == 0);
     BOOST_CHECK(sum == itemsPerProducer * nProduceres);
+    std::cout << "With termination:" << std::endl;
+    for(auto cons: consumers)
+        cons->clear();
+    prThr1 = GenerateProducerPool<int, CONTAINER>(nProduceres, itemsPerProducer, queue);
+    consThr1 = GenerateConsumerPool<int,CONTAINER>(nConsumers, 10*itemsPerConsumer, consumers, queue);
+    for(auto th: prThr1)
+    {
+        th->join();
+        delete th;
+    }
+    queue.terminate();
+    for(auto th: consThr1)
+    {
+        th->join();
+        delete th;
+    }
+    std::cout << "In Queue:" << queue.size() << std::endl;
+    std::cout << "Consumed:";
+    sum = 0;
+    for(int i = 0; i < nConsumers; ++i)
+    {
+        sum += consumers[i]->size();
+        std::cout << consumers[i]->size() << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "sum: " << sum << std::endl;
+    BOOST_CHECK(queue.size() == 0);
+    BOOST_CHECK(queue.size() + sum == itemsPerProducer * nProduceres);
+
+    for(auto cons: consumers)
+        cons->clear();
+    std::cout << "With restart" << std::endl;
+    queue.restart();
+    consThr1 = GenerateConsumerPool<int,CONTAINER>(nConsumers, 10*itemsPerConsumer, consumers, queue);
+    prThr1 = GenerateProducerPool<int, CONTAINER>(nProduceres, itemsPerProducer, queue);
+    for(auto th: prThr1)
+    {
+        th->join();
+        delete th;
+    }
+    queue.terminate();
+    for(auto th: consThr1)
+    {
+        th->join();
+        delete th;
+    }
+    std::cout << "In Queue:" << queue.size() << std::endl;
+    std::cout << "Consumed:";
+    sum = 0;
+    for(int i = 0; i < nConsumers; ++i)
+    {
+        sum += consumers[i]->size();
+        std::cout << consumers[i]->size() << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "sum: " << sum << std::endl;
+    BOOST_CHECK(queue.size() == 0);
+    BOOST_CHECK(queue.size() + sum == itemsPerProducer * nProduceres);
+    for(auto cons: consumers)
+        cons->clear();
+    std::cout << "Without restart" << std::endl;
+    consThr1 = GenerateConsumerPool<int,CONTAINER>(nConsumers, 10*itemsPerConsumer, consumers, queue);
+    for(auto th: consThr1)
+    {
+        th->join();
+        delete th;
+    }
+    prThr1 = GenerateProducerPool<int, CONTAINER>(nProduceres, itemsPerProducer, queue);
+    for(auto th: prThr1)
+    {
+        th->join();
+        delete th;
+    }
+    std::cout << "In Queue:" << queue.size() << std::endl;
+    std::cout << "Consumed:";
+    sum = 0;
+    for(int i = 0; i < nConsumers; ++i)
+    {
+        sum += consumers[i]->size();
+        std::cout << consumers[i]->size() << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "sum: " << sum << std::endl;
+    BOOST_CHECK(sum == 0);
+    BOOST_CHECK(queue.size() + sum == itemsPerProducer * nProduceres);
     for(auto cons: consumers)
         delete cons;
 }
