@@ -26,6 +26,34 @@ class CSyncContainer
         std::mutex containerLock_;
         std::condition_variable notEmptyFlag_;
         std::atomic<bool> terminated_;
+
+        template <typename T = CONTAINER>
+        typename std::enable_if<
+                      std::is_same<std::queue<typename CONTAINER::value_type>, T>::value ||
+                      std::is_same<std::stack<typename CONTAINER::value_type>, T>::value>::type
+        pushToContainer(T& container, value_type item);
+        template <typename T = CONTAINER>
+        typename std::enable_if<
+                      !(std::is_same<std::queue<typename CONTAINER::value_type>, T>::value ||
+                      std::is_same<std::stack<typename CONTAINER::value_type>, T>::value)>::type
+        popFromContainer(T& container, value_type& item);
+
+        template <typename T = CONTAINER>
+        typename std::enable_if<
+                      !(std::is_same<std::queue<typename CONTAINER::value_type>, T>::value ||
+                      std::is_same<std::stack<typename CONTAINER::value_type>, T>::value)>::type
+        pushToContainer(T& container, value_type item);
+
+        template <typename T = CONTAINER>
+        typename std::enable_if<
+                      std::is_same<std::queue<typename CONTAINER::value_type>, T>::value>::type
+        popFromContainer(T& container, value_type& item);
+
+        template <typename T = CONTAINER>
+        typename std::enable_if<
+                      std::is_same<std::stack<typename CONTAINER::value_type>, T>::value>::type
+        popFromContainer(T& container, value_type& item);
+
 };
 
 
@@ -35,11 +63,13 @@ CSyncContainer<CONTAINER>::CSyncContainer()
 {
     terminated_.store(false);
 }
+
 template <class CONTAINER>
 void CSyncContainer<CONTAINER>::push(value_type item)
 {
     std::unique_lock<std::mutex> lock(containerLock_);
-    container_.push_back(item);
+    //container_.push_back(item);
+    this->pushToContainer<CONTAINER>(container_, item);
     lock.unlock();
     notEmptyFlag_.notify_one();
 }
@@ -52,8 +82,7 @@ bool CSyncContainer<CONTAINER>::popOrSleep(value_type& item)
         notEmptyFlag_.wait(lock);
     if(container_.empty())
         return false;
-    item = container_.back();
-    container_.pop_back();
+    this->popFromContainer(container_, item);
     return true;
 }
 
@@ -63,8 +92,7 @@ bool CSyncContainer<CONTAINER>::popNoSleep(value_type& item)
     std::unique_lock<std::mutex> lock(containerLock_);
     if(container_.empty())
         return false;
-    item = container_.back();
-    container_.pop_back();
+    this->popFromContainer(container_, item);
     return true;
 }
 template <class CONTAINER>
@@ -87,124 +115,56 @@ void CSyncContainer<CONTAINER>::restart()
     std::unique_lock<std::mutex> lock(containerLock_);
     terminated_.store(false);
 }
-
-template<typename T>
-class CSyncContainer<std::queue<T>>
+template <class CONTAINER>
+template <typename T>
+typename std::enable_if<
+              std::is_same<std::queue<typename CONTAINER::value_type>, T>::value ||
+              std::is_same<std::stack<typename CONTAINER::value_type>, T>::value>::type
+CSyncContainer<CONTAINER>::pushToContainer(T& container, value_type item)
 {
-    public:
-        CSyncContainer<std::queue<T>>()
-        {
-            terminated_.store(false);
-        }
+    container.push(item);
+}
 
-        bool popOrSleep(T& item)
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            while(container_.empty() && !terminated_)
-                notEmptyFlag_.wait(lock);
-            if(container_.empty())
-                return false;
-            item = container_.front();
-            container_.pop();
-            return true;
-        }
-        bool popNoSleep(T& item)
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            if(container_.size() == 0)
-                return false;
-            item = container_.front();
-            container_.pop();
-            return true;
-        }
-        void push(T item)
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            container_.push(item);
-            lock.unlock();
-            notEmptyFlag_.notify_one();
-        }
-        size_t size()
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            return container_.size();
-        }
-        void terminate()
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            terminated_.store(true);
-            lock.unlock();
-            notEmptyFlag_.notify_all();
-        }
-        void restart()
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            terminated_.store(false);
-        }
-    private:
-        std::queue<T>    container_;
-        std::mutex containerLock_;
-        std::condition_variable notEmptyFlag_;
-        std::atomic<bool> terminated_;
-};
-template<typename T>
-class CSyncContainer<std::stack<T>>
+template <class CONTAINER>
+template <typename T>
+typename std::enable_if<
+              !(std::is_same<std::queue<typename CONTAINER::value_type>, T>::value ||
+              std::is_same<std::stack<typename CONTAINER::value_type>, T>::value)>::type
+CSyncContainer<CONTAINER>::popFromContainer(T& container, value_type& item)
 {
-    public:
-        CSyncContainer<std::stack<T>>()
-        {
-            terminated_.store(false);
-        }
-        bool popOrSleep(T& item)
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            while(container_.empty() && !terminated_)
-                notEmptyFlag_.wait(lock);
-            if(container_.empty())
-                return false;
-            item = container_.top();
-            container_.pop();
-            return true;
-        }
-        bool popNoSleep(T& item)
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            if(container_.size() == 0)
-                return false;
-            item = container_.top();
-            container_.pop();
-            return true;
-        }
-        void push(T item)
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            container_.push(item);
-            lock.unlock();
-            notEmptyFlag_.notify_one();
-        }
-        size_t size()
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            return container_.size();
-        }
-        void terminate()
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            terminated_.store(true);
-            lock.unlock();
-            notEmptyFlag_.notify_all();
-        }
-        void restart()
-        {
-            std::unique_lock<std::mutex> lock(containerLock_);
-            terminated_.store(false);
-        }
+    item = container.back();
+    container.pop_back();
+}
 
-    private:
-        std::stack<T>    container_;
-        std::mutex containerLock_;
-        std::condition_variable notEmptyFlag_;
-        std::atomic<bool> terminated_;
-};
+template <class CONTAINER>
+template <class T>
+typename std::enable_if<
+              !(std::is_same<std::queue<typename CONTAINER::value_type>, T>::value ||
+              std::is_same<std::stack<typename CONTAINER::value_type>, T>::value)>::type
+CSyncContainer<CONTAINER>::pushToContainer(T& container,
+                                                value_type item)
+{
+    container.push_back(item);
+}
+
+template <class CONTAINER>
+template <typename T>
+typename std::enable_if<
+              std::is_same<std::queue<typename CONTAINER::value_type>, T>::value>::type
+CSyncContainer<CONTAINER>::popFromContainer(T& container, value_type& item)
+{
+    item = container.front();
+    container.pop();
+}
+
+template <class CONTAINER>
+template <typename T>
+typename std::enable_if<
+              std::is_same<std::stack<typename CONTAINER::value_type>, T>::value>::type
+CSyncContainer<CONTAINER>::popFromContainer(T& container, value_type& item)
+{
+    item = container.top();
+    container.pop();
+}
 
 #endif
