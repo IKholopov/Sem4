@@ -1,0 +1,27 @@
+CPUID is present
+CPU Info:
+------------------
+  vendor_str : `GenuineIntel'
+  vendor id  : 0
+  brand_str  : `Intel(R) Core(TM) i5-4200U CPU @ 1.60GHz'
+  family     : 6 (06h)
+  model      : 5 (05h)
+  stepping   : 1 (01h)
+  ext_family : 6 (06h)
+  ext_model  : 69 (45h)
+  num_cores  : 2
+  num_logical: 4
+  tot_logical: 4
+  L1 D cache : 32 KB
+  L1 I cache : 32 KB
+  L2 cache   : 256 KB
+  L3 cache   : 3072 KB
+  L1D assoc. : 8-way
+  L2 assoc.  : 8-way
+  L3 assoc.  : 12-way
+  L1D line sz: 64 bytes
+  L2 line sz : 64 bytes
+  L3 line sz : 64 bytes
+  SSE units  : 128 bits (non-authoritative)
+  code name  : `Haswell (Core i5)'
+  features   : fpu vme de pse tsc msr pae mce cx8 apic mtrr sep pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe pni pclmul dts64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm sse4_1 sse4_2 syscall xd movbe popcnt aes xsave osxsave avx rdtscp lm lahf_lm constant_tsc fma3 f16c rdrand avx2 bmi1 bmi2
