@@ -1,201 +1,201 @@
 test
 pingpong:
 
-real	0m7.160s
-user	0m14.250s
+real	0m3.720s
+user	0m7.147s
 sys	0m0.000s
 nopingpong:
 
-real	0m3.148s
-user	0m6.280s
+real	0m1.639s
+user	0m3.197s
 sys	0m0.000s
 pingpong:
 
-real	0m8.491s
-user	0m16.963s
+real	0m3.716s
+user	0m6.987s
 sys	0m0.000s
 nopingpong:
 
-real	0m3.163s
-user	0m6.270s
+real	0m1.606s
+user	0m3.183s
 sys	0m0.000s
 pingpong:
 
-real	0m7.525s
-user	0m14.673s
+real	0m4.074s
+user	0m8.097s
 sys	0m0.000s
 nopingpong:
 
-real	0m3.181s
-user	0m6.350s
+real	0m1.610s
+user	0m3.183s
 sys	0m0.000s
 pingpong:
 
-real	0m6.546s
-user	0m12.887s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.177s
-user	0m6.270s
-sys	0m0.000s
-pingpong:
-
-real	0m7.398s
-user	0m14.450s
+real	0m4.094s
+user	0m8.067s
 sys	0m0.003s
 nopingpong:
 
-real	0m3.161s
-user	0m6.287s
+real	0m1.618s
+user	0m3.207s
 sys	0m0.000s
 pingpong:
 
-real	0m8.410s
-user	0m16.797s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.153s
-user	0m6.227s
-sys	0m0.000s
-pingpong:
-
-real	0m7.564s
-user	0m14.760s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.138s
-user	0m6.247s
-sys	0m0.000s
-pingpong:
-
-real	0m7.510s
-user	0m14.690s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.162s
-user	0m6.300s
-sys	0m0.000s
-pingpong:
-
-real	0m7.918s
-user	0m15.787s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.421s
-user	0m6.820s
-sys	0m0.000s
-pingpong:
-
-real	0m7.339s
-user	0m14.403s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.201s
-user	0m6.377s
-sys	0m0.000s
-pingpong:
-
-real	0m6.974s
-user	0m13.913s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.196s
-user	0m6.290s
-sys	0m0.000s
-pingpong:
-
-real	0m8.384s
-user	0m16.743s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.151s
-user	0m6.247s
-sys	0m0.000s
-pingpong:
-
-real	0m7.461s
-user	0m14.607s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.328s
-user	0m6.593s
-sys	0m0.000s
-pingpong:
-
-real	0m8.343s
-user	0m16.660s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.170s
-user	0m6.263s
-sys	0m0.000s
-pingpong:
-
-real	0m8.338s
-user	0m16.627s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.140s
-user	0m6.243s
-sys	0m0.000s
-pingpong:
-
-real	0m8.416s
-user	0m16.787s
-sys	0m0.000s
-nopingpong:
-
-real	0m3.166s
-user	0m6.307s
-sys	0m0.000s
-pingpong:
-
-real	0m6.867s
-user	0m13.387s
+real	0m3.735s
+user	0m7.160s
 sys	0m0.003s
 nopingpong:
 
-real	0m3.398s
-user	0m6.617s
+real	0m1.623s
+user	0m3.223s
 sys	0m0.000s
 pingpong:
 
-real	0m8.044s
-user	0m15.967s
+real	0m3.682s
+user	0m7.080s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.631s
+user	0m3.233s
+sys	0m0.000s
+pingpong:
+
+real	0m4.057s
+user	0m8.030s
+sys	0m0.007s
+nopingpong:
+
+real	0m1.682s
+user	0m3.320s
+sys	0m0.007s
+pingpong:
+
+real	0m3.994s
+user	0m7.953s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.650s
+user	0m3.240s
+sys	0m0.000s
+pingpong:
+
+real	0m4.045s
+user	0m8.047s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.594s
+user	0m3.177s
+sys	0m0.000s
+pingpong:
+
+real	0m3.725s
+user	0m7.183s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.608s
+user	0m3.197s
+sys	0m0.000s
+pingpong:
+
+real	0m4.137s
+user	0m8.230s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.614s
+user	0m3.177s
+sys	0m0.000s
+pingpong:
+
+real	0m4.101s
+user	0m8.070s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.708s
+user	0m3.310s
+sys	0m0.003s
+pingpong:
+
+real	0m3.676s
+user	0m7.007s
 sys	0m0.003s
 nopingpong:
 
-real	0m3.227s
-user	0m6.380s
+real	0m1.650s
+user	0m3.250s
 sys	0m0.000s
 pingpong:
 
-real	0m7.489s
-user	0m14.563s
-sys	0m0.020s
+real	0m3.777s
+user	0m7.127s
+sys	0m0.000s
 nopingpong:
 
-real	0m3.238s
-user	0m6.410s
+real	0m1.714s
+user	0m3.330s
+sys	0m0.000s
+pingpong:
+
+real	0m3.727s
+user	0m7.100s
+sys	0m0.003s
+nopingpong:
+
+real	0m1.641s
+user	0m3.233s
+sys	0m0.000s
+pingpong:
+
+real	0m4.153s
+user	0m8.163s
+sys	0m0.003s
+nopingpong:
+
+real	0m1.708s
+user	0m3.357s
+sys	0m0.000s
+pingpong:
+
+real	0m4.210s
+user	0m8.300s
+sys	0m0.007s
+nopingpong:
+
+real	0m1.590s
+user	0m3.140s
 sys	0m0.003s
 pingpong:
 
-real	0m8.090s
-user	0m16.003s
+real	0m4.171s
+user	0m8.300s
 sys	0m0.000s
 nopingpong:
 
-real	0m3.214s
-user	0m6.357s
+real	0m1.576s
+user	0m3.120s
 sys	0m0.000s
+pingpong:
+
+real	0m3.874s
+user	0m7.483s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.626s
+user	0m3.223s
+sys	0m0.000s
+pingpong:
+
+real	0m4.211s
+user	0m8.380s
+sys	0m0.000s
+nopingpong:
+
+real	0m1.607s
+user	0m3.193s
+sys	0m0.010s

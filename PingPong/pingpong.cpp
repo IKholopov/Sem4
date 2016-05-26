@@ -1,29 +1,20 @@
 #include <thread>
 #include <functional>
 
-struct TwoChars
-{
-  char a;
-  char b;
-};
 
-const int N = 10000000;
-const int M = 100;
-TwoChars ch;
+const int N = 500000000;
+
+char ping[2];
 
 int main()
 {
   auto thr1 = new std::thread([&](){
-      //      for(int i = 0; i < N; ++i)
-      for(int i = 0; i < M; ++i)
       for(int i = 0; i < N; ++i)
-	ch.a = i;
+	ping[0] = i;
     });
   auto thr2 = new std::thread([&](){
-      for(int i = 0; i < M; ++i)
-	//for(int i = 0; i < N; ++i)
       for(int i = 0; i < N; ++i)
-	ch.b = i;
+	ping[1] = i;
     });
   thr1->join();
   thr2->join();
